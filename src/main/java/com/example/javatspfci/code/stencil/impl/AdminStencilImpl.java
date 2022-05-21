@@ -55,21 +55,23 @@ public class AdminStencilImpl implements AdminStencil {
         int updateCode = 1;
         Map<String, Object> data = null;
         //本地设置图片路径
-        //String imagePath = "C:/Users/Lenovo/Desktop/image/" + id;
+//        String imagePath = "C:/Users/Lenovo/Desktop/image/" + id;
         //服务器路径
         String imagePath = "/usr/local/src/spring-boot/image/" + id;
-        String headPicturePath = FileUtil.addImg(headPicture, username);
+        String headPicturePath = FileUtil.addImg(headPicture, imagePath);
         Boolean updateJudge = false;
-        if (!adminService.queryAdminCountByUsername(username)){
-            updateJudge = adminService.updateAdminInfo(id, headPicturePath, path);
+        String queryId = adminService.queryAdminCountByUsername(username);
+        if (id.equals(queryId)){
+            updateJudge = adminService.updateAdminInfo(id, username, headPicturePath);
         } else {
             data = new HashMap<>();
             data.put("username","用户名已使用");
+            updateCode = 0;
         }
         if (updateJudge){
             data = new HashMap<>();
             data.put("username",username);
-            data.put("headPicture",headPicture);
+            data.put("headPicture",headPicturePath);
         }
         Map<String, Object> message = new HashMap<>();
         message.put("update_code",updateCode);

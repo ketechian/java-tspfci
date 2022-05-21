@@ -23,8 +23,8 @@
         WHERE `de_phone` = #{phone}
     </select>
 
-    <select id="queryCountByName" resultType="java.lang.Integer">
-        SELECT COUNT(*)
+    <select id="queryCountByName" resultType="java.lang.String">
+        SELECT `de_id`
         FROM `tb_delivery`
         WHERE `de_user_name` = #{name}
     </select>

@@ -39,7 +39,7 @@ public interface DeliveryService extends IService<Delivery> {
      * @param name 用户名
      * @return
      */
-    public Boolean queryCountByName(String name);
+    public String queryCountByName(String name);
 
     /**
      *

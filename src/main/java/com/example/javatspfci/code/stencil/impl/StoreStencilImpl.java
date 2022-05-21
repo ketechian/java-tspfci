@@ -96,27 +96,29 @@ public class StoreStencilImpl implements StoreStencil {
         int updateCode = 1;
         Map<String, Object> data = null;
         //本地设置图片路径
-        //String imagePath = "C:/Users/Lenovo/Desktop/image/" + id;
+//        String imagePath = "C:/Users/Lenovo/Desktop/image/" + id;
         //服务器路径
         String imagePath = "/usr/local/src/spring-boot/image/" + id;
-        String storeNamePath = FileUtil.addImg(headPicture, imagePath);
+        String hedadPicturePath = FileUtil.addImg(headPicture, imagePath);
         String licencePath = FileUtil.addImg(licence, imagePath);
         Boolean updateJudge = false;
-        if (!storeService.queryCountByName(username)){
+        String queryId = storeService.queryCountByName(username);
+        if (id.equals(queryId)){
             updateJudge = storeService.updateStoreInfo(id, username, ownerName, storeName, introduce,
-                    storeNamePath, location, licencePath);
+                    hedadPicturePath, location, licencePath);
         } else {
             data = new HashMap<>();
             data.put("username","用户名已使用");
+            updateCode = 0;
         }
         if (updateJudge){
             data = new HashMap<>();
             data.put("username",username);
             data.put("ownerName",ownerName);
             data.put("introduce",introduce);
-            data.put("headPicture",headPicture);
+            data.put("headPicture",hedadPicturePath);
             data.put("location",location);
-            data.put("licence",licence);
+            data.put("licence",licencePath);
         }
         Map<String, Object> message = new HashMap<>();
         message.put("update_code",updateCode);

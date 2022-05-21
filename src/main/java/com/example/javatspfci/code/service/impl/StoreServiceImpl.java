@@ -53,8 +53,8 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store> implements
      * @return
      */
     @Override
-    public Boolean queryCountByName(String name) {
-        return storeMapper.queryCountByName(name) >= 1;
+    public String queryCountByName(String name) {
+        return storeMapper.queryCountByName(name);
     }
 
     /**

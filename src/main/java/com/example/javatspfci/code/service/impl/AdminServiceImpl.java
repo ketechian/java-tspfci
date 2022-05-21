@@ -40,8 +40,8 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
      * @return
      */
     @Override
-    public Boolean queryAdminCountByUsername(String username) {
-        return adminMapper.queryAdminCountByUsername(username) == 1;
+    public String queryAdminCountByUsername(String username) {
+        return adminMapper.queryAdminCountByUsername(username);
     }
 
     /**

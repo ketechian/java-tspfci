@@ -49,8 +49,8 @@ public class FactoryServiceImpl extends ServiceImpl<FactoryMapper, Factory> impl
      * @return
      */
     @Override
-    public Boolean queryCountByName(String name) {
-        return factoryMapper.queryCountByName(name) >= 1;
+    public String queryCountByName(String name) {
+        return factoryMapper.queryCountByName(name);
     }
 
     /**

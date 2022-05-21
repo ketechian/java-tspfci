@@ -17,7 +17,7 @@
     </resultMap>
     
     <insert id="addStore">
-        INSERT INTO `tb_store` VALUES(#{id}, #{username}, #{phone}, '', '', '', '', '', '', 0, NOW());
+        INSERT INTO `tb_store` VALUES(#{id}, #{username},'', #{phone}, '', '', '', '', '', '', 0, NOW());
     </insert>
 
     <select id="queryCountByPhone" resultType="java.lang.Integer">
@@ -27,8 +27,8 @@
           AND `is_delete` = 0
     </select>
 
-    <select id="queryCountByName" resultType="java.lang.Integer">
-        SELECT COUNT(*)
+    <select id="queryCountByName" resultType="java.lang.String">
+        SELECT `st_id`
         FROM `tb_store`
         WHERE `st_user_name` = #{name}
     </select>
@@ -94,12 +94,12 @@
         UPDATE `tb_store`
         SET
             `st_user_name` = #{username},
-            `st_owner_name` = #{onwerName},
+            `st_owner_name` = #{ownerName},
             `st_store_name` = #{storeName},
-            `st_store_introduce` = #{introduce},
+            `st_introduce` = #{introduce},
             `st_picture` = #{headPicture},
             `st_location` = #{location},
-            `st_licence` = #{location}
+            `st_licence` = #{licence}
         WHERE `st_id` = #{id}
     </update>
 

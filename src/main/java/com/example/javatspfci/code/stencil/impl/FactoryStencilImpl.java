@@ -82,7 +82,7 @@ public class FactoryStencilImpl implements FactoryStencil {
         String headPicturePath = FileUtil.addImg(headPicture,imagePath);
         String factoryLicencePath = FileUtil.addImg(factoryLicence,imagePath);
         Boolean updateJude = false;
-        if (!factoryService.queryCountByName(username)){
+        if (id.equals(factoryService.queryCountByName(username))){
          updateJude = factoryService.updateFactory(id, username, factoryName, introduce,
                 headPicturePath, location, factoryLicencePath);
         } else {

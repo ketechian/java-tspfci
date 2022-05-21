@@ -26,8 +26,8 @@
         WHERE `fac_phone` = #{phone}
     </select>
 
-    <select id="queryCountByName" resultType="java.lang.Integer">
-        SELECT COUNT(*)
+    <select id="queryCountByName" resultType="java.lang.String">
+        SELECT `fac_id`
         FROM `tb_factory`
         WHERE `fac_user_name` = #{name}
     </select>

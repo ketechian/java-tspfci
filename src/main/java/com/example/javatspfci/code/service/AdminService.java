@@ -28,7 +28,7 @@ public interface AdminService extends IService<Admin> {
      * @param username 管理员用户名
      * @return
      */
-    public Boolean queryAdminCountByUsername(String username);
+    public String queryAdminCountByUsername(String username);
 
     /**
      * 管理员登录

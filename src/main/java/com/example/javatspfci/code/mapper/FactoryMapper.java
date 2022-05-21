@@ -43,7 +43,7 @@ public interface FactoryMapper extends BaseMapper<Factory> {
      * @param name 用户名
      * @return
      */
-    public Integer queryCountByName(String name);
+    public String queryCountByName(String name);
 
     /**
      *

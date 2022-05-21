@@ -42,7 +42,7 @@ public interface StoreMapper extends BaseMapper<Store> {
      * @param name 用户名
      * @return
      */
-    public Integer queryCountByName(String name);
+    public String queryCountByName(String name);
 
     /**
      * 店家登录

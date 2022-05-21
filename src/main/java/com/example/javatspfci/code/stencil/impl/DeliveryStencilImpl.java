@@ -95,14 +95,18 @@ public class DeliveryStencilImpl implements DeliveryStencil {
         int updateCode = 1;
         Map<String, Object> data = null;
         //本地设置图片路径
-        //String imagePath = "C:/Users/Lenovo/Desktop/image/" + delID;
+//        String imagePath = "C:/Users/Lenovo/Desktop/image/" + delID;
         //服务器路径
         String imagePath = "/usr/local/src/spring-boot/image/" + delID;
         String headPicturePath = FileUtil.addImg(headPicture,imagePath);
         String drivingLicencePath = FileUtil.addImg(drivingLicence,imagePath);
         String carLicencePath = FileUtil.addImg(carLicence,imagePath);
         String carCodePath = FileUtil.addImg(carCode,imagePath);
-        boolean updateJudge = deliveryService.updateDelivery(delID,username,headPicturePath,drivingLicencePath,carLicencePath,carCodePath);
+        boolean updateJudge = false;
+        if (delID.equals(deliveryService.queryCountByName(username))){
+            updateJudge = deliveryService.updateDelivery(delID,username,headPicturePath,drivingLicencePath,carLicencePath,carCodePath);
+
+        }
         if (updateJudge){
             data = new HashMap<>();
             data.put("username",username);

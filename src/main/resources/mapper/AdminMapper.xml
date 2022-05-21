@@ -16,8 +16,8 @@
         VALUES (#{id}, #{username}, 'https://pic1.zhimg.com/v2-96c4c190b226086d011dfe7bd2c5443e_xl.jpg', 0, NOW())
     </insert>
 
-    <select id="queryAdminCountByUsername" resultType="java.lang.Integer">
-        SELECT COUNT(*)
+    <select id="queryAdminCountByUsername" resultType="java.lang.String">
+        SELECT `ad_id`
         FROM `tb_admin`
         WHERE `ad_user_name` = #{username}
     </select>

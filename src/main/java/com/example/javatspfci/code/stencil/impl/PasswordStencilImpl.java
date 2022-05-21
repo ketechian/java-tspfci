@@ -101,7 +101,7 @@ public class PasswordStencilImpl implements PasswordStencil {
             String secretPassword = SecretUtil.secretString(password);
             switch (role) {
                 case "user":
-                    if (!storeService.queryCountByName(name)) {
+                    if (storeService.queryCountByName(name) == null) {
                         allPasswordService.addUser(userId, secretPassword);
                         storeService.addStore(userId, name, phone);
                     } else {
@@ -110,7 +110,7 @@ public class PasswordStencilImpl implements PasswordStencil {
                     }
                     break;
                 case "userAdmin":
-                    if (!factoryService.queryCountByName(name)) {
+                    if (factoryService.queryCountByName(name) == null) {
                         allPasswordService.addUser(userId, secretPassword);
                         factoryService.addFactory(userId, name, phone);
                     } else {
@@ -159,7 +159,7 @@ public class PasswordStencilImpl implements PasswordStencil {
         String delID = UUIDUtil.getUUID();
         String password = createRandomPassword();
         if (registerCode == 1){
-            if (!deliveryService.queryCountByName(name)){
+            if (deliveryService.queryCountByName(name) == null){
                 String secretPassword = SecretUtil.secretString(password);
                 allPasswordService.addUser(delID, secretPassword);
                 userRoleService.addRole(delID, role);
@@ -194,7 +194,7 @@ public class PasswordStencilImpl implements PasswordStencil {
         Map<String, Object> data = new HashMap<>();
         Integer registerCode = 1;
         //判断用户名是否已用
-        Boolean nameJudge = adminService.queryAdminCountByUsername(adminName);
+        Boolean nameJudge = adminService.queryAdminCountByUsername(adminName) != null;
         if (!nameJudge) {
             data.put("username", "用户名可用");
         } else {

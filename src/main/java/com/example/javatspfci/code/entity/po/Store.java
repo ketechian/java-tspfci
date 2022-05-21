@@ -35,6 +35,10 @@ public class Store implements Serializable {
     private String stUserName;
 
     @ApiModelProperty("店名")
+    @TableField("st_factory")
+    private String stFactory;
+
+    @ApiModelProperty("店名")
     @TableField("st_store_name")
     private String stStoreName;
 

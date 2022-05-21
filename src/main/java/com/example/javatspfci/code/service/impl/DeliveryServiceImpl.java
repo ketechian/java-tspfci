@@ -54,8 +54,8 @@ public class DeliveryServiceImpl extends ServiceImpl<DeliveryMapper, Delivery> i
      * @return
      */
     @Override
-    public Boolean queryCountByName(String name) {
-        return deliveryMapper.queryCountByName(name) >= 1;
+    public String queryCountByName(String name) {
+        return deliveryMapper.queryCountByName(name);
     }
 
     /**
