@@ -188,4 +188,10 @@
           AND `d`.`order_delivery` = `c`.`de_id`
         AND `d`.`order_id` = #{orderId}
     </select>
+
+    <select id="queryAllOrderCount">
+        SELECT
+               COUNT(*)
+        FROM `tb_order`
+    </select>
 </mapper>

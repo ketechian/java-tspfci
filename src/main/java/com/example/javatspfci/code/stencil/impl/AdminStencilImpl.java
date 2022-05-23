@@ -1,14 +1,17 @@
 package com.example.javatspfci.code.stencil.impl;
 
 import com.example.javatspfci.code.entity.vo.AdminLoginMsg;
+import com.example.javatspfci.code.entity.vo.CountMsg;
 import com.example.javatspfci.code.result.Result;
-import com.example.javatspfci.code.service.AdminService;
+import com.example.javatspfci.code.service.*;
 import com.example.javatspfci.code.stencil.AdminStencil;
 import com.example.javatspfci.code.util.FileUtil;
+import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,8 +23,21 @@ import java.util.Map;
  */
 @Service
 public class AdminStencilImpl implements AdminStencil {
+
     @Autowired
     private AdminService adminService;
+
+    @Resource
+    private StoreService storeService;
+
+    @Resource
+    private FactoryService factoryService;
+
+    @Resource
+    private DeliveryService deliveryService;
+
+    @Resource
+    private OrderService orderService;
 
     @Override
     public Result getOneAdminById(String id, String path) {
@@ -76,6 +92,22 @@ public class AdminStencilImpl implements AdminStencil {
         Map<String, Object> message = new HashMap<>();
         message.put("update_code",updateCode);
         message.put("data",data);
+        return new Result().result200(message, path);
+    }
+
+    /**
+     * 查看各用户数量
+     * @param path url路径
+     * @return
+     */
+    public Result queryAllTableCount(String path){
+        Integer factoryCount = factoryService.queryAllFactoryCount();
+        Integer deliveryCount = deliveryService.queryAllDeliverCount();
+        Integer storeCount = storeService.queryAllStoreCount();
+        Integer orderCount = orderService.queryAllOrderCount();
+        CountMsg countMsg = new CountMsg(factoryCount,deliveryCount,storeCount,orderCount);
+        Map<String, Object> message = new HashMap<>();
+        message.put("data",countMsg);
         return new Result().result200(message, path);
     }
 }

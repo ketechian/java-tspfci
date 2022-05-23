@@ -29,4 +29,11 @@ public interface AdminStencil {
      * @return
      */
     public Result updateAdminInfo(String id, String username, MultipartFile headPicture, String path) throws IOException;
+
+    /**
+     * 查看各用户数量
+     * @param path url路径
+     * @return
+     */
+    public Result queryAllTableCount(String path);
 }

@@ -103,10 +103,7 @@ public class DeliveryStencilImpl implements DeliveryStencil {
         String carLicencePath = FileUtil.addImg(carLicence,imagePath);
         String carCodePath = FileUtil.addImg(carCode,imagePath);
         boolean updateJudge = false;
-        if (delID.equals(deliveryService.queryCountByName(username))){
-            updateJudge = deliveryService.updateDelivery(delID,username,headPicturePath,drivingLicencePath,carLicencePath,carCodePath);
-
-        }
+        updateJudge = deliveryService.updateDelivery(delID,username,headPicturePath,drivingLicencePath,carLicencePath,carCodePath);
         if (updateJudge){
             data = new HashMap<>();
             data.put("username",username);

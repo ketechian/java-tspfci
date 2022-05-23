@@ -115,4 +115,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     public OrderQueryMsg queryOneOrder(String orderId) {
         return orderMapper.queryOneOrder(orderId);
     }
+
+    @Override
+    public Integer queryAllOrderCount() {
+        return orderMapper.queryAllOrderCount();
+    }
 }

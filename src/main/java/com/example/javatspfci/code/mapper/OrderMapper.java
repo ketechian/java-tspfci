@@ -87,4 +87,10 @@ public interface OrderMapper extends BaseMapper<Order> {
      */
     public OrderQueryMsg queryOneOrder(String orderId);
 
+    /**
+     * 查询所有订单数
+     * @return
+     */
+    public Integer queryAllOrderCount();
+
 }

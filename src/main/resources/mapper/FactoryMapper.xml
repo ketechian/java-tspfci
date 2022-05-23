@@ -11,7 +11,7 @@
         <result column="fac_phone" property="facPhone" />
         <result column="fac_picture" property="facPicture" />
         <result column="fac_location" property="facLocation" />
-        <result column="fac_lences_id" property="facLencesId" />
+        <result column="fac_licence" property="facLicence" />
         <result column="fac_delete" property="facDelete" />
         <result column="create_time" property="createTime" />
     </resultMap>
@@ -40,7 +40,7 @@
                `tb_factory`.`fac_phone`,
                `tb_factory`.`fac_picture`,
                `tb_factory`.`fac_location`,
-               `tb_factory`.`fac_lences_id`,
+               `tb_factory`.`fac_licence`,
                `tb_all_password`.`all_password`,
                `tb_user_role`.`u_role`
         FROM `tb_factory`,`tb_all_password`,`tb_user_role`

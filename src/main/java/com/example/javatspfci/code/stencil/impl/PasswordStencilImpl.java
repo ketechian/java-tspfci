@@ -101,7 +101,7 @@ public class PasswordStencilImpl implements PasswordStencil {
             String secretPassword = SecretUtil.secretString(password);
             switch (role) {
                 case "user":
-                    if (storeService.queryCountByName(name) == null) {
+                    if (!storeService.queryCountByPhone(phone)) {
                         allPasswordService.addUser(userId, secretPassword);
                         storeService.addStore(userId, name, phone);
                     } else {
@@ -110,7 +110,7 @@ public class PasswordStencilImpl implements PasswordStencil {
                     }
                     break;
                 case "userAdmin":
-                    if (factoryService.queryCountByName(name) == null) {
+                    if (!factoryService.queryCountByPhone(phone)) {
                         allPasswordService.addUser(userId, secretPassword);
                         factoryService.addFactory(userId, name, phone);
                     } else {
@@ -159,7 +159,7 @@ public class PasswordStencilImpl implements PasswordStencil {
         String delID = UUIDUtil.getUUID();
         String password = createRandomPassword();
         if (registerCode == 1){
-            if (deliveryService.queryCountByName(name) == null){
+            if (!deliveryService.queryCountByPhone(phone)){
                 String secretPassword = SecretUtil.secretString(password);
                 allPasswordService.addUser(delID, secretPassword);
                 userRoleService.addRole(delID, role);

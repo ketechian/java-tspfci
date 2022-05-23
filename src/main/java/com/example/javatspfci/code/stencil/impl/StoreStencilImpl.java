@@ -102,15 +102,8 @@ public class StoreStencilImpl implements StoreStencil {
         String hedadPicturePath = FileUtil.addImg(headPicture, imagePath);
         String licencePath = FileUtil.addImg(licence, imagePath);
         Boolean updateJudge = false;
-        String queryId = storeService.queryCountByName(username);
-        if (id.equals(queryId)){
-            updateJudge = storeService.updateStoreInfo(id, username, ownerName, storeName, introduce,
+        updateJudge = storeService.updateStoreInfo(id, username, ownerName, storeName, introduce,
                     hedadPicturePath, location, licencePath);
-        } else {
-            data = new HashMap<>();
-            data.put("username","用户名已使用");
-            updateCode = 0;
-        }
         if (updateJudge){
             data = new HashMap<>();
             data.put("username",username);

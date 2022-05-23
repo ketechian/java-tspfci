@@ -11,7 +11,7 @@
         <result column="st_phone" property="stPhone" />
         <result column="st_picture" property="stPicture" />
         <result column="st_location" property="stLocation" />
-        <result column="st_lences_id" property="stLencesId" />
+        <result column="st_licence" property="stLicence" />
         <result column="is_delete" property="isDelete" />
         <result column="create_time" property="createTime" />
     </resultMap>
@@ -42,7 +42,7 @@
                `tb_store`.`st_introduce`,
                `tb_store`.`st_picture`,
                `tb_store`.`st_location`,
-               `tb_store`.`st_lences_id`,
+               `tb_store`.`st_licence`,
                `tb_all_password`.`all_password`,
                `tb_user_role`.`u_role`
         FROM `tb_store`,`tb_all_password`,`tb_user_role`
