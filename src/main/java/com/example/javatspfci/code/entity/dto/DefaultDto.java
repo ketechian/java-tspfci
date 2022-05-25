@@ -15,7 +15,7 @@ import java.math.BigDecimal;
  */
 
 @Data
-public class ComboDto {
+public class DefaultDto {
     @ApiModelProperty("默认配餐编号")
     private Integer defId;
 

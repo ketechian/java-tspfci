@@ -42,7 +42,7 @@ public class TablewareStencilImpl implements TablewareStencil {
         //根据餐具类型来设置置权值
         int value = 0;
         //筷子
-        if ("H".equals(type)) {
+        if ("H".equals(type) | "O".equals(type)) {
             value = 0;
             //盘子
         } else if ("P".equals(type)) {

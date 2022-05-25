@@ -105,4 +105,11 @@ public interface DeliveryService extends IService<Delivery> {
      * @return
      */
     public List<Delivery> queryFindDelivery(String username);
+
+    /**
+     * 删除配送员
+     * @param deliveryId 配送员Id
+     * @return
+     */
+    public Boolean deleteDelivery(String deliveryId);
 }

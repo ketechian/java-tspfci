@@ -36,6 +36,7 @@
     <select id="selectStoreByPhone" resultType="com.example.javatspfci.code.entity.vo.StoreLoginMsg">
         SELECT `tb_store`.`st_id`,
                `tb_store`.`st_user_name`,
+               `tb_store`.`st_factory`,
                `tb_store`.`st_phone`,
                `tb_store`.`st_owner_name`,
                `tb_store`.`st_store_name`,
@@ -55,6 +56,7 @@
     <select id="selectStoreUserById" resultType="com.example.javatspfci.code.entity.vo.StoreLoginMsg">
         SELECT `tb_store`.`st_id`,
                `tb_store`.`st_user_name`,
+               `tb_store`.`st_factory`,
                `tb_store`.`st_phone`,
                `tb_store`.`st_owner_name`,
                `tb_store`.`st_store_name`,
@@ -70,9 +72,11 @@
           AND `st_id`= #{id}
           AND `tb_store`.`is_delete`= 0
     </select>
+
     <select id="listAllStoreByPage" resultType="com.example.javatspfci.code.entity.po.Store">
         SELECT `tb_store`.`st_id`,
                `tb_store`.`st_user_name`,
+               `tb_store`.`st_factory`,
                `tb_store`.`st_phone`,
                `tb_store`.`st_owner_name`,
                `tb_store`.`st_store_name`,
@@ -82,12 +86,31 @@
                `tb_store`.`st_licence`
         FROM `tb_store`
         WHERE `tb_store`.`is_delete` = 0
+        AND `tb_store`.`st_factory` = #{factoryId}
         LIMIT #{start},#{count}
     </select>
+
     <select id="queryAllStoreCount" resultType="java.lang.Integer">
         SELECT COUNT(*)
         FROM `tb_store`
         WHERE `tb_store`.`is_delete` = 0
+    </select>
+
+    <select id="listStoreByFactoryId" resultType="com.example.javatspfci.code.entity.po.Store">
+        SELECT
+            `tb_store`.`st_id`,
+            `tb_store`.`st_user_name`,
+            `tb_store`.`st_factory`,
+            `tb_store`.`st_phone`,
+            `tb_store`.`st_owner_name`,
+            `tb_store`.`st_store_name`,
+            `tb_store`.`st_introduce`,
+            `tb_store`.`st_picture`,
+            `tb_store`.`st_location`,
+            `tb_store`.`st_licence`
+        FROM `tb_store`
+        WHERE `tb_store`.`is_delete` = 0
+        AND `tb_store`.`st_factory` = #{factroyId}
     </select>
 
     <update id="updateStoreInfo">
@@ -101,6 +124,32 @@
             `st_location` = #{location},
             `st_licence` = #{licence}
         WHERE `st_id` = #{id}
+        AND `is_delete` = 0
     </update>
 
+    <update id="addCooperation">
+        UPDATE `tb_store`
+        SET
+            `st_factory` = #{factoryId}
+        WHERE
+            `st_id` = #{storeId}
+    </update>
+
+    <update id="deleteCooperation">
+        UPDATE `tb_store`
+        SET `st_factory` = ''
+        WHERE
+            `st_factory` = #{factoryId}
+        AND `st_id` = #{storeId}
+        AND `is_delete` = 0
+    </update>
+
+    <select id="queryStoreCountByFactoryId" resultType="java.lang.Integer">
+        SELECT
+               COUNT(*)
+        FROM `tb_store`
+        WHERE
+            `st_factory` = #{factoryId}
+        AND `is_delete` = 0
+    </select>
 </mapper>

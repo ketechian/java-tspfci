@@ -1,14 +1,18 @@
 package com.example.javatspfci.code.stencil.impl;
 
 import com.example.javatspfci.code.entity.bean.PageBean;
+import com.example.javatspfci.code.entity.dto.SimpTableInfoDto;
+import com.example.javatspfci.code.entity.po.Combo;
 import com.example.javatspfci.code.entity.po.Default;
 import com.example.javatspfci.code.result.Result;
+import com.example.javatspfci.code.service.ComboService;
 import com.example.javatspfci.code.service.DefaultService;
 import com.example.javatspfci.code.stencil.ComboStencil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
@@ -22,15 +26,19 @@ import java.util.Map;
 
 @Service
 public class ComboStencilImpl implements ComboStencil {
+
     @Autowired
-    private DefaultService ComboService;
+    private DefaultService defaultService;
+
+    @Resource
+    private ComboService comboService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Result addCombo(String factoryId, String picture, BigDecimal price, String name, String info, int stock, String path) {
         Map<String, Object> message = new HashMap<>();
         try {
-            ComboService.addCombo(factoryId, picture, price, name, info, stock);
+            defaultService.addCombo(factoryId, picture, price, name, info, stock);
             message.put("data", "添加成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,7 +52,7 @@ public class ComboStencilImpl implements ComboStencil {
     public Result updateCombo(int id, String factoryId, String picture, BigDecimal price, String name, String info, int stock, String path) {
         Map<String, Object> message = new HashMap<>();
         try {
-            ComboService.updateCombo(id, factoryId, picture, price, name, info, stock);
+            defaultService.updateCombo(id, factoryId, picture, price, name, info, stock);
             message.put("data", "修改成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,7 +65,7 @@ public class ComboStencilImpl implements ComboStencil {
     public Result selectComboById(int id, String path) {
         Map<String, Object> message = new HashMap<>();
         try {
-            Default combo = ComboService.selectComboById(id);
+            Default combo = defaultService.selectComboById(id);
             message.put("data", combo);
         } catch (Exception e) {
             e.printStackTrace();
@@ -70,7 +78,7 @@ public class ComboStencilImpl implements ComboStencil {
     public Result countCombo(String path) {
         Map<String, Object> message = new HashMap<>();
         try {
-            Integer count = ComboService.countCombo();
+            Integer count = defaultService.countCombo();
             message.put("data", count);
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,7 +91,7 @@ public class ComboStencilImpl implements ComboStencil {
     public Result countComboByFactoryId(String factoryId, String path) {
         Map<String, Object> message = new HashMap<>();
         try {
-            Integer count = ComboService.countComboByFactoryId(factoryId);
+            Integer count = defaultService.countComboByFactoryId(factoryId);
             message.put("data", count);
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,7 +110,7 @@ public class ComboStencilImpl implements ComboStencil {
             //获取总记录数
             Integer totalCount = null;
             try {
-                totalCount = ComboService.countCombo();
+                totalCount = defaultService.countCombo();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -113,7 +121,7 @@ public class ComboStencilImpl implements ComboStencil {
             //获取数据
             List<Default> data = null;
             try {
-                data = ComboService.listAllComboByPage(start, count);
+                data = defaultService.listAllComboByPage(start, count);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -134,7 +142,7 @@ public class ComboStencilImpl implements ComboStencil {
             //获取总记录数
             Integer totalCount = null;
             try {
-                totalCount = ComboService.countComboByFactoryId(factoryId);
+                totalCount = defaultService.countComboByFactoryId(factoryId);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -145,7 +153,7 @@ public class ComboStencilImpl implements ComboStencil {
             //获取数据
             List<Default> data = null;
             try {
-                data = ComboService.listComboByFactory(factoryId, start, count);
+                data = defaultService.listComboByFactory(factoryId, start, count);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -160,12 +168,73 @@ public class ComboStencilImpl implements ComboStencil {
     public Result deleteCombo(Integer id, String path) {
         Map<String, Object> message = new HashMap<>();
         try {
-            ComboService.deleteCombo(id);
+            defaultService.deleteCombo(id);
             message.put("data", "删除成功");
         } catch (Exception e) {
             e.printStackTrace();
             message.put("data", "删除失败");
         }
+        return new Result().result200(message, path);
+    }
+
+    /**
+     * 添加组合
+     * @param factoryId 厂家ID
+     * @param storeId 店家ID
+     * @param price 价格
+     * @param name 姓名
+     * @param info 配套信息
+     * @param path url路径
+     * @return
+     */
+    @Override
+    public Result addStoreCombo(String factoryId, String storeId, Double price, String name, List<SimpTableInfoDto> info, String path) {
+        int addCode = 1;
+        StringBuffer sb = new StringBuffer("{");
+        for (SimpTableInfoDto t:info) {
+            sb.append(t.getName() + ",");
+        }
+
+        sb.append("} " + price + "元");
+        BigDecimal bigPrice = new BigDecimal(price);
+        boolean addJudge = comboService.addStoreCombo(factoryId,storeId,bigPrice,name,sb.toString());
+        if (!addJudge){
+            addCode = 0;
+        }
+        Map<String, Object> message = new HashMap<>();
+        message.put("add_code",addCode);
+        return new Result().result200(message, path);
+    }
+
+    /**
+     * 查看组合
+     * @param storeId 店家ID
+     * @param factoryId 厂家ID
+     * @param path url路径
+     * @return
+     */
+    @Override
+    public Result listComboByStore(String storeId, String factoryId, String path) {
+        List<Combo> data = comboService.listComboByStore(storeId, factoryId);
+        Map<String, Object> message = new HashMap<>();
+        message.put("data",data);
+        return new Result().result200(message, path);
+    }
+
+    /**
+     * 删除组合
+     * @param comboId 配套ID
+     * @param path 厂家
+     * @return
+     */
+    @Override
+    public Result deleteStoreCombo(Integer comboId, String path) {
+        int deleteCode = 1;
+        if (!comboService.deleteStoreCombo(comboId)){
+            deleteCode = 0;
+        }
+        Map<String, Object> message = new HashMap<>();
+        message.put("delete_code", deleteCode);
         return new Result().result200(message, path);
     }
 }

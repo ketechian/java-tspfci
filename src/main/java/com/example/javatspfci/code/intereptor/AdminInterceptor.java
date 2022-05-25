@@ -17,6 +17,7 @@ public class AdminInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token = request.getHeader("token");
+        String url = request.getRequestURL().toString();
         if (token == null || token.equals("")){
             response.sendRedirect(request.getContextPath() + "/base/noLogin");
             return false;
@@ -24,7 +25,7 @@ public class AdminInterceptor implements HandlerInterceptor {
             Integer code = JWTUtil.verify(token);
             if (code == 1){
                 String role = JWTUtil.getString(token,"role");
-                if (!role.equals("superAdmin")){
+                if (!url.contains(role)){
                     response.sendRedirect(request.getContextPath() + "/base/noPerm");
                     return false;
                 }

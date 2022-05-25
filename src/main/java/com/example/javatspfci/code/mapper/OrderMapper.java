@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -60,6 +61,21 @@ public interface OrderMapper extends BaseMapper<Order> {
     public Integer orderCancel(String orderId,String reason);
 
     /**
+     * 根据店家ID和厂家ID取消订单
+     * @param factoryId 厂家Id
+     * @param storeId 店家Id
+     * @return
+     */
+    public Integer orderCancelByFactoryAndStore(String factoryId, String storeId);
+
+    /**
+     * 根据配送员Id取消订单
+     * @param deliveryId 配送员Id
+     * @return
+     */
+    public Integer orderCancelByDelivery(String deliveryId);
+
+    /**
      * 店家查询订单
      * @param storeId 店家ID
      * @return
@@ -92,5 +108,21 @@ public interface OrderMapper extends BaseMapper<Order> {
      * @return
      */
     public Integer queryAllOrderCount();
+
+    /**
+     * 查询月交易额
+     * @param firstMonthDay 月初时间
+     * @param lastMonthDay 月末时间
+     * @return
+     */
+    public BigDecimal queryMonthPay(String factoryId, LocalDateTime firstMonthDay, LocalDateTime lastMonthDay);
+
+    /**
+     * 查询月订单
+     * @param firstMonthDay 月初时间
+     * @param lastMonthDay 月末时间
+     * @return
+     */
+    public Integer queryMonthOrder(String factoryId, LocalDateTime firstMonthDay, LocalDateTime lastMonthDay);
 
 }

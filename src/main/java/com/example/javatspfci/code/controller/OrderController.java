@@ -118,4 +118,14 @@ public class OrderController {
     public Result queryOneOrder(@RequestParam String orderId){
         return orderStencil.queryOneOrder(orderId, "/code/order/queryOneOrder");
     }
+
+    /**
+     * 查询对应厂家信息
+     * @param factoryId 厂家Id
+     * @return
+     */
+    @GetMapping("/queryInfoCountByFactory")
+    public Result queryInfoCountByFactory(@RequestParam String factoryId){
+        return orderStencil.queryInfoCountByFactory(factoryId, "/code/factoryId/queryInfoCountByFactory");
+    }
 }

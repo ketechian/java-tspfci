@@ -65,7 +65,7 @@ public interface StoreMapper extends BaseMapper<Store> {
      * @param count 查多少个
      * @return
      */
-    public List<Store> listAllStoreByPage(Integer start, Integer count);
+    public List<Store> listAllStoreByPage(String factoryId, Integer start, Integer count);
 
     /**
      * 查询店家数
@@ -88,4 +88,33 @@ public interface StoreMapper extends BaseMapper<Store> {
     public Integer updateStoreInfo(String id, String username, String ownerName, String storeName,
                                    String introduce, String headPicture, String location, String licence);
 
+    /**
+     * 添加合作
+     * @param storeId 店家Id
+     * @param factoryId 厂家Id
+     * @return
+     */
+    public Integer addCooperation(String storeId, String factoryId);
+
+    /**
+     * 根据厂家Id获取用户信息
+     * @param factoryId 厂家Id
+     * @return
+     */
+    public List<Store> listStoreByFactoryId(String factoryId);
+
+    /**
+     * 取消合作
+     * @param factoryId 厂家Id
+     * @param storeId 店家Id
+     * @return
+     */
+    public Integer deleteCooperation(String factoryId, String storeId);
+
+    /**
+     * 根据厂家Id获取用户
+     * @param factoryId 厂家Id
+     * @return
+     */
+    public Integer queryStoreCountByFactoryId(String factoryId);
 }

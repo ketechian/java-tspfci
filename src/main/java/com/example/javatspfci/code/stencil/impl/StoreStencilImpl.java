@@ -5,6 +5,7 @@ import com.example.javatspfci.code.entity.po.Delivery;
 import com.example.javatspfci.code.entity.po.Store;
 import com.example.javatspfci.code.entity.vo.StoreLoginMsg;
 import com.example.javatspfci.code.result.Result;
+import com.example.javatspfci.code.service.OrderService;
 import com.example.javatspfci.code.service.StoreService;
 import com.example.javatspfci.code.stencil.StoreStencil;
 import com.example.javatspfci.code.util.FileUtil;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -25,8 +27,13 @@ import java.util.Map;
  */
 @Service
 public class StoreStencilImpl implements StoreStencil {
+
     @Autowired
     private StoreService storeService;
+
+    @Resource
+    private OrderService orderService;
+
     @Override
     public Result getOneStoreById(String id, String path) {
         StoreLoginMsg storeMsg = null;
@@ -47,7 +54,7 @@ public class StoreStencilImpl implements StoreStencil {
     }
 
     @Override
-    public Result getAllStoreByPage(Integer page, Integer count, String path) {
+    public Result getAllStoreByPage(String factoryId, Integer page, Integer count, String path) {
         Map<String,Object> message = new HashMap<>();
         if (page < 1 || count <= 0) {
             message.put("data", "参数错误");
@@ -67,7 +74,7 @@ public class StoreStencilImpl implements StoreStencil {
             //获取数据
             List<Store> data = null;
             try {
-                data = storeService.listAllStoreByPage(start, count);
+                data = storeService.listAllStoreByPage(factoryId, start, count);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -116,6 +123,59 @@ public class StoreStencilImpl implements StoreStencil {
         Map<String, Object> message = new HashMap<>();
         message.put("update_code",updateCode);
         message.put("data",data);
+        return new Result().result200(message, path);
+    }
+
+    /**
+     * 商家添加合作厂家
+     * @param storeId 商家ID
+     * @param factoryId 厂家ID
+     * @return
+     */
+    @Override
+    public Result addCooperation(String storeId, String factoryId, String path) {
+        int updateCode = 1;
+        Boolean updateJudge = storeService.addCooperation(storeId, factoryId);
+        if (!updateJudge){
+            updateCode = 0;
+        }
+        Map<String, Object> message = new HashMap<>();
+        message.put("update_code",updateCode);
+        return new Result().result200(message, path);
+    }
+
+    /**
+     * 根据厂家Id获取用户信息
+     * @param factoryId 厂家Id
+     * @param path url路径
+     * @return
+     */
+    @Override
+    public Result listStoreByFactoryId(String factoryId, String path) {
+        List<Store> storeList = storeService.listStoreByFactoryId(factoryId);
+        Map<String, Object> message = new HashMap<>();
+        message.put("data",storeList);
+        return new Result().result200(message, path);
+    }
+
+    /**
+     *
+     * @param factoryId 厂家ID
+     * @param storeId 店家
+     * @param path url路径
+     * @return
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Result removeCooperation(String factoryId, String storeId, String path) {
+        int updateCode = 1;
+        Boolean cancelJudge = storeService.deleteCooperation(factoryId, storeId);
+        orderService.orderCancelByFactoryAndStore(factoryId, storeId);
+        if (!cancelJudge){
+            updateCode = 0;
+        }
+        Map<String, Object> message =new HashMap<>();
+        message.put("update_code", updateCode);
         return new Result().result200(message, path);
     }
 }

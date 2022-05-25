@@ -1,7 +1,7 @@
 package com.example.javatspfci.code.controller;
 
 
-import com.example.javatspfci.code.entity.dto.ComboDto;
+import com.example.javatspfci.code.entity.dto.DefaultDto;
 import com.example.javatspfci.code.result.Result;
 import com.example.javatspfci.code.stencil.ComboStencil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class DefaultController {
      * @return
      */
     @PostMapping("/addCombo")
-    public Result addCombo(@RequestBody ComboDto comboDto) {
+    public Result addCombo(@RequestBody DefaultDto comboDto) {
         Result result = comboStencil.addCombo(
                 comboDto.getDefFactoryId(),
                 comboDto.getDefPicture(),
@@ -48,7 +48,7 @@ public class DefaultController {
      * @return
      */
     @PostMapping("/updateCombo")
-    public Result updateCombo(@RequestBody ComboDto comboDto) {
+    public Result updateCombo(@RequestBody DefaultDto comboDto) {
         Result result = comboStencil.updateCombo(
                 comboDto.getDefId(),
                 comboDto.getDefFactoryId(),

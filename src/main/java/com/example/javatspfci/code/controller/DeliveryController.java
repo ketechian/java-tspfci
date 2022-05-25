@@ -89,19 +89,45 @@ public class DeliveryController {
         return deliveryStencil.getOneDeliveryByID(id,"/code/delivery/getOneDeliveryByID");
     }
 
+    /**
+     *
+     * @param id
+     * @param username
+     * @param headPicture
+     * @param drivingLicence
+     * @param carLicence
+     * @param carCode
+     * @return
+     * @throws IOException
+     */
     @PostMapping("/updateDeliveryInfo")
     public Result updateDeliveryInfo(@RequestParam String id,
                                      @RequestParam String username,
                                      @RequestParam MultipartFile headPicture,
                                      @RequestParam MultipartFile drivingLicence,
                                      @RequestParam MultipartFile carLicence,
-                                     @RequestParam MultipartFile carCode) throws IOException {
+                                     @RequestParam String carCode) throws IOException {
         return deliveryStencil.updateDeliveryInfo(id, username, headPicture, drivingLicence, carLicence,carCode,
                 "/code/delivery/updateDeliveryInfo");
     }
 
+    /**
+     *
+     * @param username
+     * @return
+     */
     @GetMapping("/queryFindDelivery")
     public Result queryFindDelivery(@RequestParam String username){
         return deliveryStencil.queryFindDelivery(username, "/code/delivery/queryFindDelivery");
+    }
+
+    /**
+     * 删除配送员
+     * @param deliveryId 配送员Id
+     * @return
+     */
+    @PostMapping("/deleteDelivery")
+    public Result deleteDelivery(@RequestParam String deliveryId){
+        return deliveryStencil.deleteDelivery(deliveryId, "/code/delivery/deleteDelivery");
     }
 }

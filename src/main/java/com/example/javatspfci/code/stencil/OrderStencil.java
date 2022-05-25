@@ -79,4 +79,11 @@ public interface OrderStencil {
      */
     public Result queryOneOrder(String orderId,String path);
 
+    /**
+     * 查询对应厂家信息
+     * @param factoryId 厂家Id
+     * @param path url路径
+     * @return
+     */
+    public Result queryInfoCountByFactory(String factoryId, String path);
 }

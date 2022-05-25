@@ -120,4 +120,11 @@ public interface DeliveryMapper extends BaseMapper<Delivery> {
      * @return
      */
     public List<Delivery> queryFindDelivery(String username);
+
+    /**
+     * 删除配送员
+     * @param deliveryId 配送员Id
+     * @return
+     */
+    public Integer deleteDelivery(String deliveryId);
 }

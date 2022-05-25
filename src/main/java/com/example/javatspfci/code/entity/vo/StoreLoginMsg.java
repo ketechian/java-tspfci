@@ -28,6 +28,9 @@ public class StoreLoginMsg {
     @ApiModelProperty("店名")
     private String stStoreName;
 
+    @ApiModelProperty("厂家编号")
+    private String stFactory;
+
     @ApiModelProperty("店主姓名")
     private String stOwnerName;
 

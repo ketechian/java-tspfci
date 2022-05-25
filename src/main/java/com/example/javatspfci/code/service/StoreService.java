@@ -3,7 +3,6 @@ package com.example.javatspfci.code.service;
 import com.example.javatspfci.code.entity.po.Store;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.javatspfci.code.entity.vo.StoreLoginMsg;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -60,7 +59,7 @@ public interface StoreService extends IService<Store> {
      * @param count 查询个数
      * @return
      */
-    public List<Store> listAllStoreByPage(Integer start,Integer count);
+    public List<Store> listAllStoreByPage(String factoryId, Integer start,Integer count);
 
     /**
      * 查询店家数
@@ -81,4 +80,34 @@ public interface StoreService extends IService<Store> {
      */
     public Boolean updateStoreInfo(String id, String username, String ownerName, String storeName,
                                    String introduce, String headPicture, String location, String licence);
+
+    /**
+     * 商家添加合作厂家
+     * @param storeId 商家ID
+     * @param factoryId 厂家ID
+     * @return
+     */
+    public Boolean addCooperation(String storeId,String factoryId);
+
+    /**
+     * 根据厂家Id添加用户信息
+     * @param factoryId 厂家Id
+     * @return
+     */
+    public List<Store> listStoreByFactoryId(String factoryId);
+
+    /**
+     * 取消合作
+     * @param factoryId 厂家Id
+     * @param storeId 店家Id
+     * @return
+     */
+    public Boolean deleteCooperation(String factoryId, String storeId);
+
+    /**
+     * 根据厂家Id获取用户
+     * @param factoryId 厂家Id
+     * @return
+     */
+    public Integer queryStoreCountByFactoryId(String factoryId);
 }

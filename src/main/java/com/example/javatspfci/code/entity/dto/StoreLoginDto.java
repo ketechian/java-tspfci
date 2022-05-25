@@ -11,6 +11,7 @@ import lombok.Data;
  */
 @Data
 public class StoreLoginDto {
+
     /**
      * 店家电话
      */

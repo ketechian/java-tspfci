@@ -1,9 +1,12 @@
 package com.example.javatspfci.code.stencil.impl;
 
 import com.example.javatspfci.code.entity.dto.order.OrderInfoDto;
+import com.example.javatspfci.code.entity.vo.CountMsg;
 import com.example.javatspfci.code.entity.vo.OrderQueryMsg;
 import com.example.javatspfci.code.result.Result;
+import com.example.javatspfci.code.service.DeliveryService;
 import com.example.javatspfci.code.service.OrderService;
+import com.example.javatspfci.code.service.StoreService;
 import com.example.javatspfci.code.stencil.OrderStencil;
 import com.example.javatspfci.code.util.UUIDUtil;
 import org.springframework.stereotype.Service;
@@ -11,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.temporal.TemporalAdjusters;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +25,12 @@ public class OrderStencilImpl implements OrderStencil {
 
     @Resource
     private OrderService orderService;
+
+    @Resource
+    private StoreService storeService;
+
+    @Resource
+    private DeliveryService deliveryService;
 
     /**
      * 创建订单
@@ -170,6 +181,27 @@ public class OrderStencilImpl implements OrderStencil {
         //获取数据
         OrderQueryMsg data = orderService.queryOneOrder(orderId);
         message.put("data",data);
+        return new Result().result200(message, path);
+    }
+
+    /**
+     * 查询对应厂家信息
+     * @param factoryId 厂家Id
+     * @param path url路径
+     * @return
+     */
+    @Override
+    public Result queryInfoCountByFactory(String factoryId, String path) {
+        LocalDateTime dateNow = LocalDateTime.now();
+        LocalDateTime firstMonth = dateNow.with(TemporalAdjusters.firstDayOfMonth());
+        LocalDateTime lastMonth = dateNow.with(TemporalAdjusters.lastDayOfMonth());
+        BigDecimal totalPrice = orderService.queryMonthPay(factoryId,firstMonth, lastMonth);
+        Integer totalOrder = orderService.queryMonthOrder(factoryId, firstMonth, lastMonth);
+        Integer totalStore = storeService.queryStoreCountByFactoryId(factoryId);
+        Integer totalDelivery = deliveryService.queryDeliveryCountByFactoryId(factoryId);
+        CountMsg countMsg = new CountMsg(totalPrice, totalDelivery, totalStore, totalOrder);
+        Map<String, Object> message = new HashMap<>();
+        message.put("data",countMsg);
         return new Result().result200(message, path);
     }
 

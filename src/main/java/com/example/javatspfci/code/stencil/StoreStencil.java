@@ -27,7 +27,7 @@ public interface  StoreStencil {
      * @param path url路径
      * @return
      */
-    public Result getAllStoreByPage(Integer page, Integer count, String path);
+    public Result getAllStoreByPage(String factoryId, Integer page, Integer count, String path);
 
     /**
      * 更新店家信息
@@ -44,4 +44,29 @@ public interface  StoreStencil {
     public Result updateStoreInfo(String id, String username, String ownerName, String storeName,
                                   String introduce, MultipartFile headPicture, String location, MultipartFile licence, String path) throws IOException;
 
+    /**
+     * 商家添加合作厂家
+     * @param storeId 商家ID
+     * @param factoryId 厂家ID
+     * @param path url路径
+     * @return
+     */
+    public Result addCooperation(String storeId,String factoryId, String path);
+
+    /**
+     * 根据厂家Id添加用户信息
+     * @param factoryId 厂家Id
+     * @param path url路径
+     * @return
+     */
+    public Result listStoreByFactoryId(String factoryId, String path);
+
+    /**
+     * 取消合作
+     * @param factoryId 厂家ID
+     * @param storeId 店家
+     * @param path url路径
+     * @return
+     */
+    public Result removeCooperation(String factoryId, String storeId,String path);
 }

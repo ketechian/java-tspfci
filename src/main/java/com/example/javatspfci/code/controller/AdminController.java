@@ -69,8 +69,8 @@ public class AdminController {
         return adminStencil.updateAdminInfo(id, username, headPicture, "/code/admin/updateAdminInfo");
     }
 
-    @GetMapping("/queryInfoCount")
-    public Result queryInfoCount(){
-        return adminStencil.queryAllTableCount("/code/admin/queryInfoCount");
-    }
+//    @GetMapping("/queryInfoCount")
+//    public Result queryInfoCount(){
+//        return adminStencil.queryAllTableCount("/code/admin/queryInfoCount");
+//    }
 }

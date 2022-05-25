@@ -105,9 +105,8 @@ public class AdminStencilImpl implements AdminStencil {
         Integer deliveryCount = deliveryService.queryAllDeliverCount();
         Integer storeCount = storeService.queryAllStoreCount();
         Integer orderCount = orderService.queryAllOrderCount();
-        CountMsg countMsg = new CountMsg(factoryCount,deliveryCount,storeCount,orderCount);
         Map<String, Object> message = new HashMap<>();
-        message.put("data",countMsg);
+        message.put("data",null);
         return new Result().result200(message, path);
     }
 }

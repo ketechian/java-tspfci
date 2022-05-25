@@ -46,7 +46,7 @@ public interface DeliveryStencil {
      * @return
      */
     public Result updateDeliveryInfo(String delID, String username, MultipartFile headPicture, MultipartFile drivingLicence,
-                                     MultipartFile carLicence, MultipartFile carCode, String path) throws IOException;
+                                     MultipartFile carLicence, String carCode, String path) throws IOException;
 
     /**
      * 根据用户名模糊查询用户
@@ -55,4 +55,12 @@ public interface DeliveryStencil {
      * @return
      */
     public Result queryFindDelivery(String username,String path);
+
+    /**
+     * 删除配送员
+     * @param deliveryId 配送员Id
+     * @param path url路径
+     * @return
+     */
+    public Result deleteDelivery(String deliveryId, String path);
 }

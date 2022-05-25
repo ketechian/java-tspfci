@@ -138,4 +138,9 @@
         AND `de_user_name` LIKE CONCAT('%',#{username},'%')
 
     </select>
+    <update id="deleteDelivery">
+        UPDATE `tb_delivery`
+        SET `de_delete` = 1
+        WHERE `de_id` = #{deliveryId}
+    </update>
 </mapper>

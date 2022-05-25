@@ -147,4 +147,13 @@ public class DeliveryServiceImpl extends ServiceImpl<DeliveryMapper, Delivery> i
         return deliveryMapper.queryFindDelivery(username);
     }
 
+    /**
+     * 删除配送员
+     * @param deliveryId 配送员Id
+     * @return
+     */
+    @Override
+    public Boolean deleteDelivery(String deliveryId) {
+        return deliveryMapper.deleteDelivery(deliveryId) == 1;
+    }
 }

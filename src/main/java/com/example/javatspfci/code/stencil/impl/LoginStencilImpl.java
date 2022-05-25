@@ -158,7 +158,7 @@ public class LoginStencilImpl implements LoginStencil {
      */
     public Result loginJudge(Object msg, Map<String, Object> resultMap, Map<String, String> tokenMap,
                              String path, String token) {
-        if ("".equals(token)) {
+        if ("".equals(token) || token == null) {
             //登陆成功,生成token
             token = JWTUtil.createToken(tokenMap);
             //返回
