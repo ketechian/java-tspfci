@@ -25,7 +25,7 @@ public class AdminInterceptor implements HandlerInterceptor {
             Integer code = JWTUtil.verify(token);
             if (code == 1){
                 String role = JWTUtil.getString(token,"role");
-                if (!url.contains(role)){
+                if (!url.contains("/" + role + "/")){
                     response.sendRedirect(request.getContextPath() + "/base/noPerm");
                     return false;
                 }

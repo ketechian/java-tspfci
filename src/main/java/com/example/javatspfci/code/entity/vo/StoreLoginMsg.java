@@ -47,7 +47,7 @@ public class StoreLoginMsg {
     private String stLocation;
 
     @ApiModelProperty("经营许可证编号")
-    private String stLencesId;
+    private String stLicence;
 
     @ApiModelProperty("逻辑删除")
     private Boolean isDelete;

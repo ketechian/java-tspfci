@@ -157,7 +157,7 @@ public class PasswordStencilImpl implements PasswordStencil {
             registerCode = 0;
         }
         String delID = UUIDUtil.getUUID();
-        String password = createRandomPassword();
+        String password = createRandomPassword(phone);
         if (registerCode == 1){
             if (!deliveryService.queryCountByPhone(phone)){
                 String secretPassword = SecretUtil.secretString(password);
@@ -297,13 +297,8 @@ public class PasswordStencilImpl implements PasswordStencil {
      * 随机生成一个六位数密码
      * @return
      */
-    private String createRandomPassword(){
-        Random random = new Random();
-        StringBuffer s = new StringBuffer();
-        for (int i = 0;i < 6;i++){
-            int n = random.nextInt(9);
-            s.append(n);
-        }
-        return s.toString();
+    private String createRandomPassword(String phone){
+        String password = "tspfci" + phone.substring(7,11);
+        return password;
     }
 }

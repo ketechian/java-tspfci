@@ -17,6 +17,28 @@
         <result column="order_type" property="orderType" />
     </resultMap>
 
+    <resultMap id="orderVo" type="com.example.javatspfci.code.entity.vo.OrderQueryMsg">
+        <result column="storeId" property="storeId" />
+        <result column="storeName" property="storeName" />
+        <result column="storeOwnerName" property="storeOwnerName" />
+        <result column="storePhone" property="storePhone" />
+        <result column="storeLocation" property="storeLocation" />
+        <result column="storePicture" property="storePicture" />
+        <result column="factoryId" property="factoryId" />
+        <result column="factoryPhone" property="factoryPhone" />
+        <result column="factoryLocation" property="factoryLocation" />
+        <result column="deliveryId" property="deliveryId" />
+        <result column="deliveryName" property="deliveryName" />
+        <result column="deliveryPhone" property="deliveryPhone" />
+        <result column="deliveryCarCode" property="deliveryCarCode" />
+        <result column="deliveryPicture" property="deliveryPicture" />
+        <result column="orderId" property="orderId" />
+        <result column="price" property="price" />
+        <result column="status" property="status" />
+        <result column="orderErrorReason" property="orderErrorReason" />
+        <result column="createTime" property="createTime" />
+    </resultMap>
+
     <insert id="createOrder">
         INSERT INTO `tb_order`
         VALUES (#{orderId}, #{creatorId}, #{receiverId}, #{price}, #{info}, '', #{status}, #{remark}, '', NOW(), #{type});
@@ -24,7 +46,8 @@
 
     <update id="setOrderDelivery">
         UPDATE `tb_order`
-        SET `order_delivery` = #{deliveryId}
+        SET `order_delivery` = #{deliveryId},
+            `order_status` = 4
         WHERE `order_id` = #{orderId}
     </update>
 
@@ -66,7 +89,7 @@
         AND  `order_status` != 5
     </update>
 
-    <select id="listOrderByStore" resultType="com.example.javatspfci.code.entity.vo.OrderQueryMsg">
+    <select id="listOrderByStore" resultMap="orderVo">
         SELECT
             `a`.`st_id` AS `storeId`,
             `a`.`st_store_name` AS `storeName`,

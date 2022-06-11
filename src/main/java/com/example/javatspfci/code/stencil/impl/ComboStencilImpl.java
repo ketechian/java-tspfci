@@ -75,32 +75,6 @@ public class ComboStencilImpl implements ComboStencil {
     }
 
     @Override
-    public Result countCombo(String path) {
-        Map<String, Object> message = new HashMap<>();
-        try {
-            Integer count = defaultService.countCombo();
-            message.put("data", count);
-        } catch (Exception e) {
-            e.printStackTrace();
-            message.put("data", "查询失败");
-        }
-        return new Result().result200(message, path);
-    }
-
-    @Override
-    public Result countComboByFactoryId(String factoryId, String path) {
-        Map<String, Object> message = new HashMap<>();
-        try {
-            Integer count = defaultService.countComboByFactoryId(factoryId);
-            message.put("data", count);
-        } catch (Exception e) {
-            e.printStackTrace();
-            message.put("data", "查询失败");
-        }
-        return new Result().result200(message, path);
-    }
-
-    @Override
     public Result listAllComboByPage(Integer page, Integer count, String path) {
         Map<String,Object> message = new HashMap<>();
         if (page < 1 || count <= 0) {

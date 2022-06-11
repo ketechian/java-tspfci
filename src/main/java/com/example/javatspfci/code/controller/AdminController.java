@@ -68,9 +68,4 @@ public class AdminController {
                                   @RequestParam MultipartFile headPicture) throws IOException {
         return adminStencil.updateAdminInfo(id, username, headPicture, "/code/admin/updateAdminInfo");
     }
-
-//    @GetMapping("/queryInfoCount")
-//    public Result queryInfoCount(){
-//        return adminStencil.queryAllTableCount("/code/admin/queryInfoCount");
-//    }
 }

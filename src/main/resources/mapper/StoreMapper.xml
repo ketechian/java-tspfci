@@ -31,6 +31,7 @@
         SELECT `st_id`
         FROM `tb_store`
         WHERE `st_user_name` = #{name}
+          AND `is_delete` = 0
     </select>
 
     <select id="selectStoreByPhone" resultType="com.example.javatspfci.code.entity.vo.StoreLoginMsg">
@@ -51,6 +52,7 @@
           AND `tb_all_password`.`all_id` = `tb_user_role`.`u_id`
           AND `st_phone`=#{stPhone}
           AND `all_password`=#{password}
+          AND `is_delete` = 0
     </select>
 
     <select id="selectStoreUserById" resultType="com.example.javatspfci.code.entity.vo.StoreLoginMsg">
@@ -83,7 +85,9 @@
                `tb_store`.`st_introduce`,
                `tb_store`.`st_picture`,
                `tb_store`.`st_location`,
-               `tb_store`.`st_licence`
+               `tb_store`.`st_licence`,
+               `tb_store`.`create_time`,
+               `tb_store`.`is_delete`
         FROM `tb_store`
         WHERE `tb_store`.`is_delete` = 0
         AND `tb_store`.`st_factory` = #{factoryId}
@@ -107,7 +111,9 @@
             `tb_store`.`st_introduce`,
             `tb_store`.`st_picture`,
             `tb_store`.`st_location`,
-            `tb_store`.`st_licence`
+            `tb_store`.`st_licence`,
+            `tb_store`.`create_time`,
+            `tb_store`.`is_delete`
         FROM `tb_store`
         WHERE `tb_store`.`is_delete` = 0
         AND `tb_store`.`st_factory` = #{factroyId}

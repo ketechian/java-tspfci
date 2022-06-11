@@ -20,6 +20,7 @@
         SELECT `ad_id`
         FROM `tb_admin`
         WHERE `ad_user_name` = #{username}
+        AND `is_delete` = 0
     </select>
 
     <select id="selectAdminUserByUsername" resultType="com.example.javatspfci.code.entity.vo.AdminLoginMsg">
@@ -33,6 +34,7 @@
           AND `tb_all_password`.`all_id` = `tb_user_role`.`u_id`
           AND `ad_user_name`= #{username}
           AND `all_password`= #{password}
+          AND `is_delete` = 0
     </select>
 
     <select id="selectAdminUserById" resultType="com.example.javatspfci.code.entity.vo.AdminLoginMsg">

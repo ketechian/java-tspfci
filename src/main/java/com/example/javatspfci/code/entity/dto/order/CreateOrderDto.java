@@ -23,7 +23,7 @@ public class CreateOrderDto {
     /**
      * 订单信息
      */
-    private OrderInfoDto info;
+    private String info;
 
     /**
      * 订单备注信息

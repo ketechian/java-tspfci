@@ -17,7 +17,7 @@ public interface OrderStencil {
      * @param path url路径
      * @return
      */
-    public Result createOrder(String creatorId, String receiverId, Integer value, OrderInfoDto info, String remark, String type, Double price, String path);
+    public Result createOrder(String creatorId, String receiverId, Integer value, String info, String remark, String type, Double price, String path);
 
     /**
      * 设置订单配送员

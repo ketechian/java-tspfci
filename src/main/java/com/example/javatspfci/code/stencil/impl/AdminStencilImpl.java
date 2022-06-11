@@ -27,18 +27,6 @@ public class AdminStencilImpl implements AdminStencil {
     @Autowired
     private AdminService adminService;
 
-    @Resource
-    private StoreService storeService;
-
-    @Resource
-    private FactoryService factoryService;
-
-    @Resource
-    private DeliveryService deliveryService;
-
-    @Resource
-    private OrderService orderService;
-
     @Override
     public Result getOneAdminById(String id, String path) {
         AdminLoginMsg adminMsg = null;
@@ -95,18 +83,4 @@ public class AdminStencilImpl implements AdminStencil {
         return new Result().result200(message, path);
     }
 
-    /**
-     * 查看各用户数量
-     * @param path url路径
-     * @return
-     */
-    public Result queryAllTableCount(String path){
-        Integer factoryCount = factoryService.queryAllFactoryCount();
-        Integer deliveryCount = deliveryService.queryAllDeliverCount();
-        Integer storeCount = storeService.queryAllStoreCount();
-        Integer orderCount = orderService.queryAllOrderCount();
-        Map<String, Object> message = new HashMap<>();
-        message.put("data",null);
-        return new Result().result200(message, path);
-    }
 }

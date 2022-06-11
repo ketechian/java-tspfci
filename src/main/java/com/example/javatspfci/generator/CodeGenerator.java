@@ -10,17 +10,17 @@ import java.util.Collections;
 public class CodeGenerator {
 
     //数据库url
-    private static final String dbUrl = "jdbc:mysql://127.0.0.1:3306/db_tspfci";
+    private static final String dbUrl = "jdbc:mysql://1.117.140.254:3306/db_tspfci";
     //数据库driver
     private static final String dbDriverName = "com.mysql.cj.jdbc.Driver";
     //数据库用户名
     private static final String dbUsername = "root";
     //数据库密码
-    private static final String dbPassword = "123456";
+    private static final String dbPassword = "Root_594666";
     //包名
     private static final String projectPackage = "com.example.javatspfci";
     //表名数组
-    private static final String tables[] = {"tb_combo"};
+    private static final String tables[] = {"tb_cache"};
 
     public static void main(String[] args) {
         FastAutoGenerator.create(dbUrl, dbUsername, dbPassword)

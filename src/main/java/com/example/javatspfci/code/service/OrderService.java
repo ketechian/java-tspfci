@@ -101,12 +101,6 @@ public interface OrderService extends IService<Order> {
     public OrderQueryMsg queryOneOrder(String orderId);
 
     /**
-     * 查询所有订单数
-     * @return
-     */
-    public Integer queryAllOrderCount();
-
-    /**
      * 查询月交易额
      * @param firstMonthDay 月初时间
      * @param lastMonthDay 月末时间

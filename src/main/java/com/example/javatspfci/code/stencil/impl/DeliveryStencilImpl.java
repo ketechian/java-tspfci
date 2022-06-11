@@ -100,9 +100,9 @@ public class DeliveryStencilImpl implements DeliveryStencil {
         int updateCode = 1;
         Map<String, Object> data = null;
         //本地设置图片路径
-//        String imagePath = "C:/Users/Lenovo/Desktop/image/" + delID;
+        String imagePath = "C:/Users/Lenovo/Desktop/image/" + delID;
         //服务器路径
-        String imagePath = "/usr/local/src/spring-boot/image/" + delID;
+//        String imagePath = "/usr/local/src/spring-boot/image/" + delID;
         String headPicturePath = FileUtil.addImg(headPicture,imagePath);
         String drivingLicencePath = FileUtil.addImg(drivingLicence,imagePath);
         String carLicencePath = FileUtil.addImg(carLicence,imagePath);

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.javatspfci.code.mapper.CacheMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.javatspfci.code.entity.po.Cache">
+        <id column="cac_id" property="cacId" />
+        <result column="cac_store" property="cacStore" />
+        <result column="cac_tableware" property="cacTableware" />
+        <result column="cac_status" property="cacStatus" />
+        <result column="count" property="count" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+    <insert id="addCache">
+        INSERT INTO `tb_cache` VALUES (NULL, #{storeId}, #{tablewareId}, 1, #{count}, NOW());
+    </insert>
+
+    <select id="queryOne" resultType="com.example.javatspfci.code.entity.po.Combo">
+        SELECT
+            `cac_id`, `cac_store`, `cac_tableware`, `cac_status`, `count`, `create_time`
+        FROM `tb_cache`
+        WHERE `cac_store` = #{storeId}
+        AND `cac_tableware` = #{tablewareId}
+    </select>
+
+    <select id="findCache" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM `tb_cache`
+        WHERE `cac_store` = #{storeId}
+        AND `cac_tableware` = #{tablewareId}
+    </select>
+
+    <delete id="deleteAll">
+        DELETE FROM `tb_cache`
+        WHERE `cac_store` = #{storeId}
+    </delete>
+
+    <update id="updateCache">
+        UPDATE `tb_cache`
+        SET `cac_status` = ABS(`cac_status` - 1)
+        WHERE `cac_store` = #{storeId}
+        AND `cac_tableware` = #{tablewareId}
+    </update>
+
+    <select id="listCacheByStoreId" resultType="com.example.javatspfci.code.entity.po.Cache">
+        SELECT
+            `cac_id`, `cac_store`, `cac_tableware`, `cac_status`, `count`, `create_time`
+        FROM `tb_cache`
+        WHERE `cac_store` = #{storeId}
+    </select>
+
+</mapper>

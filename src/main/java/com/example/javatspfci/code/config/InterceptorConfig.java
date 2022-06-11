@@ -15,21 +15,13 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        //拦截需要管理员权限的路径
-        String[] addSuperAdminPathPatterns = {
-        };
-        //拦截需要配送员权限的路径
-        String[] addDeliverPathPatterns = {
-        };
-        //拦截需要厂家权限的路径
-        String[] addUserAdminPathPatterns = {
-        };
-        //拦截需要店家权限的路径
-        String[] addUserPathPatterns = {
-        };
-        //excludePathPatterns排除的路径
-        String[] excludePathPatterns = {
 
-        };
+
+        String[] pathPatterns = {"/**"};
+
+        String[] excludePathPatterns = {"/base/**"};
+
+
+
     }
 }

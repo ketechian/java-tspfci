@@ -138,11 +138,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         return orderMapper.queryOneOrder(orderId);
     }
 
-    @Override
-    public Integer queryAllOrderCount() {
-        return orderMapper.queryAllOrderCount();
-    }
-
     /**
      * 查询月交易额
      * @param firstMonthDay 月初时间

@@ -24,12 +24,14 @@
         SELECT COUNT(*)
         FROM `tb_factory`
         WHERE `fac_phone` = #{phone}
+        AND `fac_delete` = 0
     </select>
 
     <select id="queryCountByName" resultType="java.lang.String">
         SELECT `fac_id`
         FROM `tb_factory`
         WHERE `fac_user_name` = #{name}
+        AND `fac_delete` = 0
     </select>
 
     <select id="selectFacPhone" resultType="com.example.javatspfci.code.entity.vo.FactoryLoginMsg">
@@ -48,6 +50,7 @@
           AND `tb_all_password`.`all_id` = `tb_user_role`.`u_id`
           AND `fac_phone`=#{facPhone}
           AND `all_password`=#{password}
+          AND `fac_delete` = 0
     </select>
 
     <select id="listAllFactoryByPage" resultType="com.example.javatspfci.code.entity.po.Factory">

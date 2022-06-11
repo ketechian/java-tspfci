@@ -21,12 +21,14 @@
         SELECT COUNT(*)
         FROM `tb_delivery`
         WHERE `de_phone` = #{phone}
+        AND `de_delete` = 0
     </select>
 
     <select id="queryCountByName" resultType="java.lang.String">
         SELECT `de_id`
         FROM `tb_delivery`
         WHERE `de_user_name` = #{name}
+          AND `de_delete` = 0
     </select>
 
     <select id="selectDeByPhone" resultType="com.example.javatspfci.code.entity.vo.DeliveryLoginMsg">
@@ -45,6 +47,7 @@
           AND `tb_all_password`.`all_id` = `tb_user_role`.`u_id`
           AND `de_phone`=#{dePhone}
           AND `all_password`=#{password}
+          AND `del_delete` = 0
     </select>
 
     <select id="listAllDeliverByPage" resultType="com.example.javatspfci.code.entity.po.Delivery">

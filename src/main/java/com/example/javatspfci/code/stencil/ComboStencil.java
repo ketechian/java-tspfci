@@ -52,20 +52,6 @@ public interface ComboStencil {
     public Result selectComboById(int id, String path);
 
     /**
-     * 查询套餐种类数
-     * @param path url
-     * @return
-     */
-    public Result countCombo(String path);
-
-    /**
-     * 查询指定厂家套餐种类数
-     * @param factoryId 厂家id
-     * @return
-     */
-    public Result countComboByFactoryId(String factoryId, String path);
-
-    /**
      * 分页查询套餐信息
      * @param page 开始位置
      * @param count 查多少个
